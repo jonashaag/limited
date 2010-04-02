@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+{% load filters %}
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <author>
+        <name>{{ ADMINS|join:", ||0" }}</name>
+    </author>
+    <title>{{ BLOG_TITLE }}</title>
+    <id>{{ BLOG_URL }}</id>
+    <updated>{{ pubdate.isoformat }}</updated>
+
+    <link rel="related" href="{{ BLOG_URL }}" title="{{ BLOG_TITLE }}" />
+    <link rel="self" href="{{ BLOG_URL }}{{ REQUEST_PATH }}" title="{{ FEED_TITLE }}" />
+
+    <generator uri="{{ limited.url }}" version="{{ limited.version }}">
+        {{ limited.name }}
+    </generator>
+
+    {% if FEED_ICON %}
+        <icon>{{ FEED_ICON }}</icon>
+    {% endif %}
+    {% if FEED_LOGO %}
+        <logo>{{ FEED_LOGO }}</logo>
+    {% endif %}
+    {% if BLOG_SUBTITLE %}
+        <subtitle>{{ BLOG_SUBTITLE }}</subtitle>
+    {% endif %}
+
+    {% for item in items %}
+        <entry>
+            <title>{{ item.title }}</title>
+            <link href="{{ item.absolute_url }}" />
+            <id>{{ BLOG_URL }}/{{ item.url }}-{{ item.id}}</id>
+            <updated>{{ item.time.isoformat }}</updated>
+
+            <author>
+                <name>{{ item.user.username }}</name>
+                <email>{{ item.user.email }}</email>
+            </author>
+
+            {% if show_summary %}
+                <summary type="html"><![CDATA[{{ item.parsed|truncatewords:100 }}]]></summary>
+            {% endif %}
+            {% if show_content %}
+                <content type="html"><![CDATA[{{ item.parsed }}]]></content>
+            {% endif %}
+        </entry>
+    {% endfor %}
+</feed>

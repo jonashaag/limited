@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block title %}
+    {% if issingle %}
+        {{ items.0.title }}
+    {% else %}
+        Page {{ page }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if emtpy_query %}
+        No posts found.
+    {% else %}
+        {% if not issingle %}{% include 'pagination.html' %}{% endif %}
+        {% for item in items %}
+            <h2><a href="{{ item.absolute_url }}" title="{{ item.title }}">{{ item.title|parse|removetags:"p" }}</a></h2>
+            <div class="post_meta">
+                <a href="{{ item.absolute_url }}#comments" class="comment_count">
+                    {{ item.comment_set.count|humanize }}
+                    comment{% ifnotequal item.comment_set.count 1 %}s{% endifnotequal %}</a>
+                (posted
+                {% if MULTI_USER %}
+                    by {{ item.user.name }}
+                {% endif %}
+                {{ item.time|humanize }})
+
+                {% if item.tags.count %}
+                    | tagged with
+                    {% for tag in item.tags.all %}
+                        <a href="{% url by_tag tag.slug %}" title="Posts tagged with tag.name">
+                            {{ tag.name }}
+                        </a>
+                    {% endfor %}
+                {% endif %}
+
+                {% if item.tag %}
+                    <p class="tags"><span>Tag(s):</span>
+                    {% for tag in item.tags.all %}
+                        “<a class="tag" href="{% url by_tag tag.slug %}">{{ tag.name }}</a>“
+                    {% endfor %}
+                    </p>
+                {% endif %}
+            </div>
+            <div class="content">
+                {{ item.parsed }}
+            </div>
+        {% endfor %}
+
+        {% if issingle %}
+            <div class="comments">
+                <a name="comments"></a>
+                {% if comments|listnotempty %}
+                    <h2>Comments</h2>
+                {% else %}
+                    <h2>No comments</h2>
+                {% endif %}
+
+                <h3>{% comment %}<a href="#" name="newcomment" id="comment_toggle"
+                    onClick="javascript:toggle_elem('comment_form'); return false;">{% endcomment %}
+                    Write a comment
+                {% comment %}</a>{% endcomment %}</h3>
+
+                {% include 'errors.html' %}
+
+                <form id="comment_form" name="comment" method="POST" action="{{ comment_url }}#comments">
+                    <p><label for="comment_name">Name:</label><br>
+                    <input name="name" id="comment_name" class="name"><br></p>
+
+                    <p><label for="comment_text">Comment:</label><br>
+
+                    <code><b>*bold*</b>, <i>_italic_</i>, [http://google.com Link to Google]</code>,<br>
+                    <code>> Quote</code><br>
+                    <textarea class="text" id="comment_text" name="text"></textarea></p>
+
+                    <p><input type="submit" value="Publish"></p>
+                    <br>
+                </form>
+
+                {% for comment in comments %}
+                    <a name="comment_{{ comment.id }}"></a>
+                    <h4>Comment #{{ forloop.revcounter }} by {{ comment.name }} ({{ comment.creation_time|humanize }}):</h4>
+                    <blockquote class="bq_comment">{{ comment.parsed }}</blockquote>
+                {% endfor %}
+            </div>
+        {% else %}
+            {% include 'pagination.html' %}
+        {% endif %}
+    {% endif %}
+{% endblock %}

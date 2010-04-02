@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        {% include 'html_meta.html' %}
+        <title>{% spaceless %}{% block title %}{% endblock %}{% endspaceless %} - {{ BLOG_TITLE }}</title>
+        <meta name="description" content="{% spaceless %}{% block description %}{% endblock %}{% endspaceless %}">
+        {% include 'additional_meta.html' %}
+        {% block additional_meta %}{% endblock %}
+    </head>
+    <body {% block onload %}{% endblock %}{% include 'onload.html' %}>
+        <div id="container">
+            <div id="header">
+                {% include 'header.html' %}
+            </div>
+
+            {% block navigation_top %}
+                <div id="navigation_top" class="navigation">
+                    <ul>
+                        {% for item in navigation_top reversed %}
+                            <li><a href="{{ item.absolute_url }}" title="{{ item.title }}"
+                            {% ifequal item.plain_url navigation_top_current %}class="current"{% endifequal %}>
+                                {{ item.title }}
+                            </a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endblock %}
+
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            <div id="sidebar">
+                {% include 'widgets.html' %}
+            </div>
+
+        {% include 'footer.html' %}
+    </div>
+    </body>
+</html>

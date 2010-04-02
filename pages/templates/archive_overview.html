@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block title %}
+    Blog archive: Overview
+{% endblock %}
+
+{% block content %}
+    <h2>Blog archive</h2>
+    {% for year in years %}
+        <ul class="archive">
+            <li>
+                <a href="{% url archive_yearly year %}" title="Archive for {{ year }}">{{ year }}</a>
+                <ul>
+                    {% for month, postcount in year.months %}
+                        <li>
+                            <a href="{% url archive_monthly year.year month|fill_n:2 %}"
+                                title="Archive for {{ month|monthname }}/{{ year }}">
+                                {{ month|monthname }} ({{ postcount }})</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    {% endfor %}
+{% endblock %}
+
+
+{% block context_navigation %}
+    <li><a href="{% url archive %}" title="Archive">Archive overview</a></li>
+{% endblock %}

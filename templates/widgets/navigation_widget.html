@@ -1,0 +1,8 @@
+<h3>Navigation</h3>
+<ul id="navigation_widget">
+    {% block context_navigation %}
+        <li><a href="{% url blog %}" title="New/all posts">New/all posts</a></li>
+        <li><a href="{% url archive %}" title="Archive">Archive</a></li>
+    {% endblock %}
+    {% block navigation_widget %}{% endblock %}
+</ul>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block title %}
+    {% if issingle %}
+        {{ items.0.title }}
+    {% else %}
+        Pages
+    {% endif %}
+{% endblock %}
+
+{% block description %}
+    {% if issingle %}
+        {{ items.0.title }}
+    {% else %}
+        {{ BLOG_DESCRIPTION }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if emtpy_query %}
+        No pages found.
+    {% else %}
+        {% for item in items %}
+            <h2><a href="{{ item.absolute_url }}" title="{{ item.title }}">{{ item.title }}</a></h2>
+            <div class="post_meta">
+                posted
+                {% if MULTI_USER %}
+                    by {{ item.user }}
+                {% endif %}
+                {{ item.time|humanize }}
+            </div>
+            <div class="content">
+                {{ item.parsed }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

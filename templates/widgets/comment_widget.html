@@ -1,0 +1,16 @@
+<h3>Latest Comments</h3>
+<ul>
+    {% if latestcomments %}
+        {% for comment in latestcomments %}
+            <li>
+                <a href="{% url single_post comment.page.url %}#comment_{{ comment.id }}"
+                    title="{{ comment.page.title }}">
+                    {{ comment.name }} commented "{{ comment.page.title }}":<br>
+                    <q class="comment_widget_latest">{{ comment.text|truncatewords:25 }}</q>
+                </a>
+            </li>
+        {% endfor %}
+    {% else %}
+        no comments posted yet
+    {% endif %}
+</ul>

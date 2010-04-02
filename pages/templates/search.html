@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block title %}
+    Search for {{ keywords|join:", " }}
+{% endblock %}
+
+{% block content %}
+    {% if emtpy_query %}
+        No posts matching {{ keywords|join:", " }} found.
+    {% else %}
+        {% for post in results %}
+            <h2><a href="{% url single_post post.url %}" title="{{ post.title }}">
+                {{ post.title }}
+            </a></h2>
+            <div class="post_meta">
+                posted {{ post.time|humanize }}
+            </div>
+            <div class="content">
+                {{ post.parsed|truncatewords_html:50 }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

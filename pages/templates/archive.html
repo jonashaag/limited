@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block title %}
+    Blog archive for {{ month|monthname }} {{ year }}
+{% endblock %}
+
+{% block content %}
+    {% for post in items %}
+        <h2><a href="{% url single_post post.url %}" title="{{ post.title }}">{{ post.title }}</a></h2>
+        <div class="post_meta">
+            posted {{ post.creation_time|humanize }}
+        </div>
+        <div class="content">
+            {{ post.parsed|truncatewords_html:20 }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block context_navigation %}
+    <li><a href="{% url archive %}" alt="Archive">Archive overview</a></li>
+    {% if month %}
+        {% for month in months %}
+            <li>
+                <a href="{% url archive_monthly year month|fill_n:2 %}"
+                   title="Archive for {{ month|monthname }}/{{ year }}">
+                Archive for {{ month|monthname }}
+                </a>
+            </li>
+        {% endfor %}
+    {% else %}
+        {% for year in years %}
+            <li>
+                <a href="{% url archive_yearly year %}" title="Archive for {{ year }}">
+                    Archive for {{ year }}
+                </a>
+            </li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

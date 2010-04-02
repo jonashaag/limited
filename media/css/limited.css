@@ -1,0 +1,375 @@
+/*
+    template design is based on "watchthis!" by luka cvrk (www.solucija.com)
+*/
+
+
+/*
+    ~~~~~~~~~~~~~~~~~~~~~~~
+        GENERAL STYLES
+    ~~~~~~~~~~~~~~~~~~~~~~~
+*/
+body, #navigation_top, #sidebar * {
+    /* Reset default browser styles */
+    margin: 0; padding: 0;
+}
+
+body {
+    font: .9em DejaVu Sans, "Lucida Grande", Verdana, Helvetica, sans-serif;
+    color: #333;
+    margin-top: 15px;
+}
+
+a {
+    color: #1B276E;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    border: 0;
+}
+
+p  {
+    margin: 5px 0 15px;
+    line-height: 1.6em;
+    /* improve readability dramatically by using more space between lines */
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: normal;
+    padding-top: 10px;
+    color: #1B276E;
+    margin: 0 0 10px;
+}
+
+blockquote {
+    margin: 0 0 0 10px;
+    padding: 10px 0px 0px 20px;
+    line-height: 1.5em;
+    background: url(../images/quotes.gif) no-repeat top left;
+    font-style: italic;
+}
+
+blockquote p {
+    margin-top: 0;
+}
+
+
+/*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        GROUPED STYLE DEFINITIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+#sidebar li, #navigation_top li, #footer {
+    font-size: 0.8em;
+}
+
+#container, #header {
+    margin: 0 auto;
+}
+
+#content, #sidebar {
+    margin-top: 20px;
+}
+
+#container, #navigation_top {
+    width: 900px;
+}
+
+
+/*
+    ~~~~~~~~~~~~~~
+        HEADER
+    ~~~~~~~~~~~~~~
+*/
+#header {
+    padding: 5px 10px;
+    width: 878px;
+    background-color: #F2F2F2;
+    outline: 1px solid #ccc;
+}
+
+/* blog title */
+.title, h2, h3, h4, .pagination {
+    font-family: Georgia, "Times Europa", "Garamond", serif;
+}
+
+.title {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.title, .title a {
+    color: black;
+}
+
+.title a:hover {
+    text-decoration: none;
+}
+
+.title a .hr {
+    color: #ccc;
+}
+
+.subtitle {
+    font-style: italic;
+    margin-left: 20px;
+}
+
+/* header navigation */
+#navigation_top {
+    margin-top: -46px;
+}
+
+#navigation_top li {
+    list-style: none;
+    display: inline;
+}
+#navigation_top li a {
+    float: right;
+    padding: 7px 20px;
+    margin: 3px 0 0 2px;
+    color: #ccc;
+}
+
+#navigation_top li a.current, #navigation_top li a.current:hover {
+    color: #fff;
+    background: #999;
+    font-weight: bold;
+    border: 1px solid #B3B3B3;
+}
+
+#navigation_top li a:hover {
+    color: #999;
+}
+
+
+/*
+    ~~~~~~~~~~~~~~~~
+        CONTENT
+    ~~~~~~~~~~~~~~~~
+*/
+#content {
+    clear: both;
+    float: left;
+    width: 600px;
+}
+
+#content img {
+    margin: 0 3px 3px 0;
+    border: 2px solid #eee;
+    padding: 2px;
+}
+
+.content table {
+    margin: 0px 0px 10px 5px;
+    border-collapse: collapse;
+}
+
+.content table th {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #F3F3F3;
+}
+
+.content table td {
+    padding: 5px 10px;
+}
+
+.content table tr {
+    background-color: #F8F8F8;
+}
+
+.content pre {
+}
+
+.centered_cells td {
+    text-align: center;
+}
+
+.content ul li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.comments, .content {
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.comments form p label {
+    font-weight: bold;
+}
+
+.post_meta {
+    color: #7F7F7F;
+    padding-bottom: 10px;
+}
+
+.bq_comment {
+    margin-top: -10px;
+}
+
+.comment_count {
+    text-decoration: none;
+    font-weight: bold;
+    color: inherit;
+}
+
+.comment_count:hover {
+    text-decoration: inherit;
+}
+
+q.latest {
+    text-decoration: none;
+    color: #333;
+    font-style: italic;
+}
+
+.commentinlinequoteword {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.commentinlinequote {
+    margin-left: 15px;
+    margin-bottom:5px;
+    display: block;
+    padding: 5px;
+    padding-left: 10px;
+    border-left: 2px solid grey;
+    background-color: rgb(245, 245, 245);
+}
+
+div.code {
+    max-width: 520px !important;
+    overflow-x: auto;
+}
+
+/*
+    ~~~~~~~~~~~~~~~~
+        SIDEBAR
+    ~~~~~~~~~~~~~~~~
+*/
+#sidebar {
+    float: right;
+    width: 280px;
+}
+#sidebar h3 {
+    border-bottom: 1px solid #ccc;
+}
+
+#sidebar li {
+    list-style: none;
+}
+
+#sidebar a {
+    display: block;
+    padding: 5px 5px;
+}
+
+#sidebar li a {
+    border-bottom: 1px solid #ccc;
+}
+
+#sidebar a:hover {
+    background-color: rgb(240, 240, 240);
+    text-decoration: inherit;
+}
+
+.widget {
+}
+
+.widget_separator {
+    margin: 20px auto 10px auto !important;
+}
+
+.widget.even {
+}
+
+/*
+    ~~~~~~~~~~~~~~~
+        FOOTER
+    ~~~~~~~~~~~~~~~
+*/
+#footer {
+    clear: both;
+    padding: 15px 0;
+    border-top: 1px solid #ccc;
+}
+
+
+/*
+    ~~~~~~~~~~~~~~~~~~~
+        PAGINATION
+    ~~~~~~~~~~~~~~~~~~~
+*/
+.pagination {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pagination span a, .pagination a, .pagination span {
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 1px 3px 1px 3px;
+}
+
+.pagination a:hover, .pagination span a:hover {
+    text-decoration: inherit;
+}
+
+.pagination span.inactive {
+    color: rgb(150,150,150);
+}
+
+
+/*
+    ~~~~~~~~~~~~~~~~~~~~~
+        VARIOUS STUFF
+    ~~~~~~~~~~~~~~~~~~~~~
+*/
+.highlight {
+    background-color: yellow;
+}
+
+
+/*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        PRINT AND MOBILE STYLES
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+@media print {
+    #sidebar, .pagination, #footer, #header, .comment_count {
+        display: none;
+    }
+    #content {
+        width: auto;
+        font-family: Georgia, "Times Europa", "Garamond", serif;
+    }
+    p {
+        margin-bottom: 0;
+        line-height: 1.3em;
+        font-size: medium;
+    }
+    h2 {
+        margin-top: 10px;
+    }
+}
+
+@media handheld {
+    #sidebar {
+        display: none;
+    }
+    #content {
+        width: auto;
+        border-right: 0;
+    }
+}

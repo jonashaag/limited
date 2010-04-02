@@ -1,0 +1,16 @@
+{% if error %}
+    <div class="error" id="error">
+        {{ error }}
+    </div>
+    <script type="text/javascript">
+        window.addEventListener('load', scroll_error, false);
+    </script>
+{% endif %}
+{% if warning %}
+    <div class="notice" id="warning">
+        {{ warning }}
+    </div>
+    <script type="text/javascript">
+        window.addEventListener('load', scroll_warning, false);
+    </script>
+{% endif %}

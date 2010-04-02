@@ -1,0 +1,6 @@
+{% for widget in WIDGETS %}
+    <div class="widget {% cycle 'even' 'odd' %}" id="{{ widget.name }}">
+    {% include widget.path %}
+    </div>
+    <div class="widget_separator">{% include 'widget_separator.html' %}</div>
+{% endfor %}

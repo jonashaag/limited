@@ -1,0 +1,21 @@
+<meta http-equiv="content-type" content="text/html;charset=utf-8" >
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="content-script-Type" content="text/javascript">
+<meta name="robots" content="index,follow">
+<link rel="shortcut icon" href="/media/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/media/images/favicon.ico" type="image/x-icon">
+<meta name="keywords" content="{{ META_KEYWORDS }}">
+<link rel="alternate" type="application/rss+xml" title="{{ FEED_TITLE }}"
+    href='{% url feed %}'>
+<link rel="alternate" type="application/rss+xml" title="{{ FEED_TITLE }} (short)"
+    href='{% url short_feed %}'>
+<link rel="alternate" type="application/rss+xml" title="{{ FEED_TITLE }} (headlines only)"
+    href='{% url title_feed %}'>
+{% block feeds %}{% endblock %}
+{% for path in CSS_FILES %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}{{ path }}" type="text/css">
+{% endfor %}
+{% for path in JS_FILES %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}{{ path }}"></script>
+{% endfor %}
+{% block custom_headers %}{% endblock %}

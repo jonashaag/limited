@@ -1,0 +1,25 @@
+<div class="pagination">
+    {% if previous_page %}
+        <a href="{% url blog_pages previous_page %}" title="previous page">« previous</a>
+    {% else %}
+        <span class="inactive">« previous</span>
+    {% endif %}
+    {% for n in pagescount %}
+        {% ifequal n "..." %}
+            <span class="ellipsis">·</span>
+        {% else %}
+            <span {% ifequal n page %}class="active"{% endifequal %}>
+                {% ifnotequal n page %}
+                    <a href="{% url blog_pages n %}" title="Page {{ n }}">
+                {% endifnotequal %}
+                {{ n }}
+                {% ifnotequal n page %}</a>{% endifnotequal %}
+            </span>
+        {% endifequal %}
+    {% endfor %}
+    {% if next_page %}
+        <a href="{% url blog_pages next_page %}" title="next page">next »</a>
+    {% else %}
+        <span class="inactive">next »</span>
+    {% endif %}
+</div>
